@@ -1,0 +1,20 @@
+apm-server:
+  host: "0.0.0.0:8200"  # Host and port to bind to. Use "0.0.0.0" to listen on all network interfaces.
+
+output.elasticsearch:
+  hosts: ["es01:9200"]  # Elasticsearch host and port where APM data will be stored.
+  index: "apm-%{[observer.version]}-%{+yyyy.MM.dd}"  # Index pattern for APM data.
+
+setup.kibana:
+  host: "http://kibana:5601"  # URL to your Kibana instance.
+
+setup.template.settings:
+  index.number_of_shards: 1
+  index.codec: best_compression
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/apm-server
+  name: apm-server.log
+  keepfiles: 7
